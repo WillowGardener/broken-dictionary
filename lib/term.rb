@@ -1,8 +1,9 @@
 class Term
-  def initialize(word, definition)
-    @word = word
-    @definition = definition
+  attr_reader(:word, :definition)
 
+  def initialize(attributes)
+    @word = attributes[:word]
+    @definition = attributes[:definition]
   end
 
   def show_term

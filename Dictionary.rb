@@ -36,13 +36,17 @@ def add_term
   w = gets.chomp
   puts "what's that mean?"
   d = gets.chomp
-  @compendium << Term.new(w, d)
+  @compendium << Term.new({:word => w, :definition => d})
   @comp_hash[w]=d
 end
 
 def show_terms
   puts "\n"
-  puts @comp_hash
+  @compendium.each do |term|
+    puts term.word + ":"
+    puts term.definition
+    puts "\n"
+  end
 end
 
 def delete_term
@@ -79,10 +83,10 @@ def search_term
   puts "tell me the word you'd like to see"
   input = gets.chomp
   @compendium.each do |term|
-    if input == term.just_word
+    if input == term.word
       term
       puts "\n"
-      puts term.just_word
+      puts term.just_word + ":"
       puts term.just_def
     else
       puts "I don't know that word"
