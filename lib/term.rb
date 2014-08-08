@@ -1,22 +1,21 @@
 class Term
-  attr_reader(:word, :definition)
+  attr_reader(:word, :definitions)
 
   def initialize(attributes)
+    @attributes = attributes
     @word = attributes[:word]
-    @definition = attributes[:definition]
+    @definitions = attributes[:definitions]
   end
 
   def show_term
     puts @word + ":"
-    puts @definition
+    counter = 0
+    @definitions.each do |d|
+      counter +=1
+      puts "#{counter}) #{d}"
+    end
   end
 
-  def just_word
-    @word
-  end
 
-  def just_def
-    @definition
-  end
 
 end

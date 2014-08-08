@@ -44,7 +44,8 @@ def add_term
     puts "do you want to enter another definition? (y/n)"
     more_def = gets.chomp
   end
-  new_term = Term.new({:word => word, :definition => definitions})
+  init_hash = {:word => word, :definitions => definitions}
+  new_term = Term.new(init_hash)
   @compendium << new_term
   @comp_hash[word]=definitions
 end
@@ -52,8 +53,7 @@ end
 def show_terms
   puts "\n"
   @compendium.each do |term|
-    puts term.word + ":"
-    puts term.definition
+    term.show_term
     puts "\n"
   end
 end
@@ -73,33 +73,55 @@ end
 
 def edit_term
   puts "\nwhich term must change?\n"
-  @comp_hash.each_key do |word|
-    puts word
-  end
+  show_terms
   term_choice = gets.chomp
+  @compendium.each do |term|
+    if term.word == term_choice
+      term_choice = term
+    end
+  end
 
   if @comp_hash.include?(term_choice) == false
     puts "\nThat word isn't in the dictionary. Try again\n\n"
     edit_term
   end
 
-  puts "enter the new definition for this word"
-  new_definition = gets.chomp
-  @comp_hash[term_choice] = new_definition
+  puts "Enter the number of the definition that must change"
+  term_choice.show_term
+  number_input = gets.chomp
+  term_choice.definition.each_index do |meaning|
+    if meaning == number_input
+      puts "what will the new definition be?"
+      new_def = gets.chomp
+      term_choice.definition[meaning] = new_def
+    end
+  end
+
+
+
+  # mutable_definition.definitions.each do |definition|
+  #   if definition.index == number_input
+  #     puts "enter the new definition"
+  #     new_def = gets.chomp
+  #     new_def = mutable_definition.definitions[definition]
+  #   end
+  # end
+
 end
 
 def search_term
   puts "tell me the word you'd like to see"
   input = gets.chomp
+  counter = 0
   @compendium.each do |term|
     if input == term.word
       term
-      puts "\n"
-      puts term.just_word + ":"
-      puts term.just_def
-    else
-      puts "I don't know that word"
+      term.show_term
+      counter += 1
     end
+  if counter == 0
+    puts "I don't know that word"
+  end
   end
 end
 
