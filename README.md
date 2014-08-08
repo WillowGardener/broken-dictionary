@@ -1,0 +1,1 @@
+An exciting new program that allows the user to create a custom dictionary displaying words and their definitions! Wow! A streamlined  scrap-heap of code allows INFINITE customization to your dictionary, allowing you to invent languages, JUST LIKE THE WORLD'S GREATEST HEROES
