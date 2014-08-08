@@ -33,11 +33,20 @@ end
 
 def add_term
   puts "enter a word"
-  w = gets.chomp
-  puts "what's that mean?"
-  d = gets.chomp
-  @compendium << Term.new({:word => w, :definition => d})
-  @comp_hash[w]=d
+  word = gets.chomp
+  definitions = []
+
+  more_def = "y"
+  while more_def == "y" do
+    puts "what's that mean?"
+    definitions << gets.chomp
+
+    puts "do you want to enter another definition? (y/n)"
+    more_def = gets.chomp
+  end
+  new_term = Term.new({:word => word, :definition => definitions})
+  @compendium << new_term
+  @comp_hash[word]=definitions
 end
 
 def show_terms
